@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amattea Ciudadanía | Consultoría con Abogados</title>
+    <meta name="description" content="Tu ciudadanía italiana con abogados reales. Más de 30 años de trayectoria, 15.000 casos de éxito. Oficinas en Buenos Aires, Roma y Málaga.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #008C45;
+            --verde2: #00A651;
+            --verde3: #E8F5EE;
+            --rosso: #CE2B37;
+            --oro: #C9973C;
+            --text: #1A1408;
+            --text2: #4A3F2F;
+            --muted: #8A7D6A;
+            --gris1: #F7F5F0;
+            --gris2: #EDE9E0;
+            --wa: #25D366;
+            --wa2: #128C7E;
+            --nav-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background-color: #FFFFFF;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6, .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Top Bar Tricolor */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #008C45 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #CE2B37 66.66%);
+            z-index: 1001;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes tickMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes ping {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 140, 69, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 140, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 140, 69, 0); }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .btn-wa {
+            background-color: var(--wa);
+            color: white;
+        }
+
+        .btn-wa:hover {
+            background-color: var(--wa2);
+            transform: translateY(-2px);
+        }
+
+        .btn-green {
+            background-color: var(--verde);
+            color: white;
+        }
+
+        .btn-green:hover {
+            background-color: var(--verde2);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .btn-outline-white:hover {
+            background-color: white;
+            color: var(--text);
+        }
+        
+        .btn-white {
+            background-color: white;
+            color: var(--verde);
+        }
+        .btn-white:hover {
+            background-color: var(--gris1);
+            transform: translateY(-2px);
+        }
+
+        /* Fab WA */
+        .fab-wa {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: bounce 4s ease-in-out infinite;
+        }
+        
+        .fab-wa .fab-text {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--text);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+
+        .fab-wa .fab-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--wa);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .fab-wa:hover .fab-icon {
+            transform: scale(1.05);
+        }
+
+        .fab-wa .fab-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--wa);
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Nav */
+        header {
+            position: fixed;
+            top: 4px;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .bandera-css {
+            display: flex;
+            height: 14px;
+            width: 21px;
+            border-radius: 2px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .bandera-css div { flex: 1; }
+        .bg-verde { background-color: var(--verde); }
+        .bg-blanco { background-color: #fff; }
+        .bg-rojo { background-color: var(--rosso); }
+
+        .logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .logo-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text2);
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--verde);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: center/cover no-repeat;
+            background-image: url('hero/hero.webp');
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-top: var(--nav-height);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(4,20,8,.88) 0%, rgba(4,20,8,.75) 45%, rgba(4,20,8,.25) 100%);
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 600px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            backdrop-filter: blur(4px);
+            color: white;
+        }
+        
+        .chip.chip-dark {
+            background: rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .punto-verde {
+            width: 8px;
+            height: 8px;
+            background-color: var(--wa);
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        .hero h1 {
+            font-size: 68px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: #6ee89b;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-item {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .hero-cards {
+            position: relative;
+            height: 400px;
+        }
+
+        .hcard {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            width: 240px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .hcard h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .hcard p {
+            font-size: 12px;
+            opacity: 0.8;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .hcard-1 { top: -20px; right: 40px; animation-delay: 0s; z-index: 1; }
+        .hcard-2 { top: 140px; right: 280px; animation-delay: -2s; z-index: 2; }
+        .hcard-3 { top: 290px; right: 60px; animation-delay: -4s; z-index: 3; }
+        
+        .hcard-img {
+            height: 100px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Banner Pasaporte */
+        .banner-pasaporte {
+            height: 320px;
+            background: url('pasa/pasapor.webp') center 30%/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .banner-pasaporte::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,140,69,.85) 0%, rgba(0,140,69,.4) 50%, rgba(0,0,0,.1) 100%);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+        }
+
+        .banner-content h2 {
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .banner-content p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        /* Ticker */
+        .ticker-wrapper {
+            background-color: var(--verde);
+            color: white;
+            padding: 16px 0;
+            overflow: hidden;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: tickMove 28s linear infinite;
+        }
+
+        .ticker-item {
+            font-size: 15px;
+            font-weight: 600;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .ticker-item::after {
+            content: '•';
+            opacity: 0.3;
+        }
+        .ticker-item:last-child::after { content: ''; }
+
+        /* Servicios */
+        .servicios {
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--verde3) 100%);
+        }
+        
+        .sec-title {
+            text-align: center;
+            font-size: 44px;
+            margin-bottom: 16px;
+        }
+        .sec-desc {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 56px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .svc-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .svc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--verde);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .svc-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,140,69,0.2);
+            box-shadow: 0 12px 30px rgba(0,140,69,0.08);
+        }
+        
+        .svc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .svc-num {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--gris1);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1;
+            z-index: 1;
+        }
+
+        .svc-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .svc-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .svc-card p {
+            color: var(--text2);
+            font-size: 14px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge-time {
+            display: inline-block;
+            background: var(--verde3);
+            color: var(--verde);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            align-self: flex-start;
+        }
+        
+        .svc-btn {
+            font-weight: 600;
+            color: var(--verde);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .svc-card.special {
+            background-color: var(--verde3);
+        }
+
+        /* Proceso */
+        .proceso {
+            background-color: var(--verde);
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+        
+        .proceso::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('pasa/pasapor.webp') center/cover;
+            opacity: 0.1;
+        }
+        
+        .proceso-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .proceso h2 {
+            font-size: 40px;
+            margin-bottom: 60px;
+        }
+
+        .proceso-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .paso {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            animation: float 6s ease-in-out infinite;
+        }
+        .paso:nth-child(even) { animation-duration: 7s; animation-delay: 1s; }
+
+        .circulo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .paso:hover .circulo {
+            background: white;
+            color: var(--verde);
+            transform: scale(1.1);
+        }
+
+        .paso-texto {
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.3;
+        }
+
+        /* Tiempos */
+        .tiempos {
+            background-color: var(--gris1);
+            position: relative;
+        }
+        .tiempos::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('pasa/pasapor.webp') center/cover;
+            opacity: 0.05;
+        }
+        .tiempos-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .tiempo-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tiempo-barra {
+            position: absolute;
+            bottom: 0; left: 0; height: 4px;
+            background: linear-gradient(90deg, var(--verde), var(--verde2));
+            width: 0;
+            transition: width 1s ease;
+        }
+        .tiempo-card.visible .tiempo-barra { width: 100%; }
+        
+        .t-icon { font-size: 28px; }
+        .t-info h4 { font-family: 'DM Sans', sans-serif; font-size: 15px; margin-bottom: 2px; }
+        .t-info .duration { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--verde); font-weight: 700; }
+        .t-info .nota { font-size: 12px; color: var(--muted); }
+
+        /* Nosotros */
+        .nosotros {
+            position: relative;
+            background: white;
+        }
+        .nosotros::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('pasa/pasapor.webp') center/cover;
+            opacity: 0.04;
+        }
+        .nos-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .nos-left {
+            position: relative;
+        }
+        .ncard-main {
+            background: white;
+            border-top: 4px solid var(--verde);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text);
+            position: relative;
+            z-index: 2;
+        }
+        .offices-float {
+            position: absolute;
+            right: -20px;
+            bottom: -40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 3;
+        }
+        .office-tag {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            animation: float 5s ease-in-out infinite;
+        }
+        .office-tag:nth-child(2) { animation-delay: 1s; margin-left: 20px; }
+        .office-tag:nth-child(3) { animation-delay: 2s; }
+        
+        .nos-right .tag {
+            color: var(--verde);
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .nos-right h2 {
+            font-size: 40px;
+            margin-bottom: 32px;
+            line-height: 1.2;
+        }
+        .check-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 16px;
+            color: var(--text2);
+        }
+        .check-icon {
+            color: var(--verde);
+            background: var(--verde3);
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Acompañamiento */
+        .acompa {
+            background: url('acom/acompan.webp') center 35%/cover no-repeat;
+            position: relative;
+        }
+        .acompa::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(0,80,30,.92) 0%, rgba(0,100,40,.75) 55%, rgba(0,0,0,.15) 100%);
+        }
+        .acompa-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .acompa-left { color: white; }
+        .acompa-left h2 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+        .acompa-left p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+        
+        .glass-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 24px;
+            border-radius: 16px;
+            color: white;
+            transition: background 0.3s;
+        }
+        .glass-card:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        .glass-icon { font-size: 32px; margin-bottom: 12px; }
+        .glass-card h4 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; }
+
+        /* Testimonios */
+        .testimonios {
+            background-color: var(--verde);
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+        .testimonios::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('acom/acompan.webp') center/cover;
+            opacity: 0.08;
+        }
+        .test-container { position: relative; z-index: 2; }
+        .test-container h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 56px;
+        }
+        
+        .carousel-wrapper {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            animation: tickMove 40s linear infinite;
+        }
+        .carousel-wrapper:hover .carousel-track {
+            animation-play-state: paused;
+        }
+        .test-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+            border-left: 4px solid white;
+            padding: 32px;
+            border-radius: 0 16px 16px 0;
+            width: 350px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .test-stars { color: #FFD700; letter-spacing: 2px; }
+        .test-text {
+            font-size: 16px;
+            font-style: italic;
+            flex-grow: 1;
+        }
+        .test-author {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .test-meta {
+            font-size: 13px;
+            opacity: 0.8;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Casos de exito */
+        .testimonios-reales {
+            background-color: var(--gris1);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .casos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .caso-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+        .caso-card:hover {
+            transform: translateY(-5px);
+        }
+        .caso-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        .caso-info {
+            padding: 24px;
+        }
+        .caso-info h4 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .caso-info p {
+            font-size: 15px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #008C45, #006833);
+            text-align: center;
+            color: white;
+        }
+        .cta-section h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        .cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Contacto */
+        .contacto {
+            background-color: var(--gris1);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .c-info .tag {
+            color: var(--verde); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 14px;
+        }
+        .c-info h2 { font-size: 40px; margin: 16px 0 24px; line-height: 1.1; }
+        .c-info p { color: var(--text2); margin-bottom: 40px; font-size: 18px; }
+        
+        .c-btns { display: flex; gap: 16px; margin-bottom: 48px; }
+        
+        .c-sedes { display: flex; flex-direction: column; gap: 16px; }
+        .c-sede-item { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--gris2);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 15px;
+            background: var(--gris1);
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--verde);
+            background: white;
+        }
+        textarea.form-control { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; margin-top: 10px; font-size: 16px; padding: 16px; }
+
+        /* Sedes */
+        .sedes {
+            background-color: #1A1408;
+            color: white;
+            padding: 60px 0;
+        }
+        .sedes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .sede-card {
+            background: rgba(255,255,255,0.05);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .sede-card h4 {
+            display: flex; align-items: center; gap: 8px; font-size: 18px; margin-bottom: 12px; font-family: 'DM Sans', sans-serif;
+        }
+        .sede-card p { font-size: 14px; opacity: 0.7; }
+
+        /* Footer */
+        footer {
+            background-color: #1A1408;
+            color: white;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .f-logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; }
+        .f-logo span { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; }
+        .f-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
+        .f-links a { color: rgba(255,255,255,0.7); font-size: 14px; }
+        .f-links a:hover { color: white; }
+        .f-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 860px) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            section { padding: 60px 5%; }
+            .container { padding: 0; }
+            
+            nav a { display: none; } /* Hide links in mobile */
+            .logo-tagline { display: none; }
+            
+            .hero { padding-top: calc(var(--nav-height) + 20px); }
+            .hero-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: clamp(30px, 8vw, 44px); }
+            .hero-actions { flex-direction: column; }
+            .hero-actions .btn { width: 100%; }
+            .hero-cards { display: none; }
+            .hero::before {
+                background: linear-gradient(180deg, rgba(4,20,8,.1) 0%, rgba(4,20,8,.96) 100%);
+            }
+            .stats { flex-direction: column; gap: 12px; }
+
+            .banner-pasaporte { height: auto; padding: 60px 5%; }
+            .banner-content h2 { font-size: 32px; }
+            .banner-content .btn { width: 100%; }
+
+            .sec-title { font-size: 32px; }
+            .proceso-grid { grid-template-columns: 1fr; gap: 40px; }
+            .paso { flex-direction: row; text-align: left; animation: none; }
+            
+            .nos-grid { grid-template-columns: 1fr; }
+            .offices-float { position: relative; right: auto; bottom: auto; margin-top: 24px; }
+            .office-tag { animation: none; }
+            
+            .acompa-grid { grid-template-columns: 1fr; }
+            .glass-grid { grid-template-columns: 1fr; }
+            .acompa-left h2 { font-size: 36px; }
+
+            .cta-section h2 { font-size: 32px; }
+            .cta-btns { flex-direction: column; }
+            
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .c-btns { flex-direction: column; }
+            
+            .sedes-grid { grid-template-columns: 1fr; }
+            .casos-grid { grid-template-columns: 1fr; }
+            
+            .f-links { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Floater -->
+    <a href="https://wa.me/5492255620032" target="_blank" class="fab-wa">
+        <div class="fab-text">Consulta gratuita</div>
+        <div class="fab-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </div>
+    </a>
+
+    <!-- Top Bar Tricolor -->
+    <div class="top-bar"></div>
+
+    <!-- Nav -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="bandera-css">
+                    <div class="bg-verde"></div><div class="bg-blanco"></div><div class="bg-rojo"></div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name playfair">AMATTEA</span>
+                    <span class="logo-tagline">Ciudadanías · Servicios Consulares</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#proceso">Proceso</a></li>
+                    <li><a href="#tiempos">Tiempos</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <a href="https://wa.me/5492255620032" class="btn btn-green">💬 Consultar ahora</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content reveal" data-delay="1">
+                <div class="chip">
+                    <div class="bandera-css"><div class="bg-verde"></div><div class="bg-blanco"></div><div class="bg-rojo"></div></div>
+                    Consultora · No gestora · 3 países
+                    <div class="punto-verde"></div>
+                </div>
+                <h1>Tu ciudadanía italiana, <em>con abogados reales</em></h1>
+                <p>Somos una consultora con más de 30 años de trayectoria acompañando a las personas en sus trámites consulares.</p>
+                <div class="hero-actions">
+                    <a href="https://wa.me/5492255620032" class="btn btn-wa">💬 Consulta gratuita</a>
+                    <a href="#servicios" class="btn btn-outline-white">Ver servicios &rarr;</a>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">30+ años</div>
+                    <div class="stat-item">15.000+ casos</div>
+                    <div class="stat-item">3 países</div>
+                </div>
+            </div>
+            <div class="hero-cards reveal" data-delay="3">
+                <div class="hcard hcard-1">
+                    <div class="hcard-img" style="background-image: url('pasa/pasapor.webp');"></div>
+                    <h3 class="playfair">Pasaporte Italiano</h3>
+                    <p>Tramitado en 35 días directo con el consulado.</p>
+                </div>
+                <div class="hcard hcard-2">
+                    <div class="hcard-img" style="background-image: url('hero/hero.webp');"></div>
+                    <h3 class="playfair">Ciudadanía</h3>
+                    <p>Administrativa y judicial con abogados.</p>
+                </div>
+                <div class="hcard hcard-3">
+                    <div class="hcard-img" style="background-image: url('acom/acompan.webp');"></div>
+                    <h3 class="playfair">Homologación</h3>
+                    <p>Títulos y estudios validados en Europa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Pasaporte -->
+    <section class="banner-pasaporte">
+        <div class="container banner-content reveal" data-delay="1">
+            <div class="chip chip-dark">🇮🇹 Pasaporte Italiano</div>
+            <h2 class="playfair">Tu pasaporte listo<br>en solo 35 días</h2>
+            <p>Desde la solicitud hasta que lo tenés en mano. Coordinamos todo con el consulado por vos.</p>
+            <a href="https://wa.me/5492255620032" class="btn btn-white">💬 Consultá por WhatsApp &rarr;</a>
+        </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker-wrapper">
+        <div class="ticker-track">
+            <div class="ticker-item">🇮🇹 Ciudadanía italiana</div>
+            <div class="ticker-item">⚖️ Consultora con abogados</div>
+            <div class="ticker-item">🌍 Atención en todo el mundo</div>
+            <div class="ticker-item">✅ +15.000 casos</div>
+            <div class="ticker-item">📘 Pasaporte</div>
+            <div class="ticker-item">🪪 DNI</div>
+            <div class="ticker-item">📋 AIRE</div>
+            <div class="ticker-item">🎓 Homologación</div>
+            <div class="ticker-item">🏠 Residencias</div>
+            <div class="ticker-item">📍 Buenos Aires · Roma · Málaga</div>
+            <div class="ticker-item">💸 Financiación disponible</div>
+            <!-- Duplicated for infinite scroll -->
+            <div class="ticker-item">🇮🇹 Ciudadanía italiana</div>
+            <div class="ticker-item">⚖️ Consultora con abogados</div>
+            <div class="ticker-item">🌍 Atención en todo el mundo</div>
+            <div class="ticker-item">✅ +15.000 casos</div>
+            <div class="ticker-item">📘 Pasaporte</div>
+            <div class="ticker-item">🪪 DNI</div>
+            <div class="ticker-item">📋 AIRE</div>
+            <div class="ticker-item">🎓 Homologación</div>
+            <div class="ticker-item">🏠 Residencias</div>
+            <div class="ticker-item">📍 Buenos Aires · Roma · Málaga</div>
+            <div class="ticker-item">💸 Financiación disponible</div>
+        </div>
+    </div>
+
+    <!-- Servicios -->
+    <section id="servicios" class="servicios">
+        <div class="container">
+            <h2 class="sec-title playfair reveal">Servicios Consulares</h2>
+            <p class="sec-desc reveal" data-delay="1">Soluciones integrales para tu vida en Italia y Europa, gestionadas por especialistas.</p>
+            
+            <div class="servicios-grid">
+                <!-- 01 -->
+                <div class="svc-card reveal" data-delay="1">
+                    <span class="svc-num">01</span>
+                    <div class="svc-icon">🇮🇹</div>
+                    <h3 class="playfair">Ciudadanía Administrativa</h3>
+                    <p>Gestión completa para obtener tu ciudadanía vía consular o presencial en Italia.</p>
+                    <span class="badge-time">90 días – 1.5 años</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 02 -->
+                <div class="svc-card reveal" data-delay="2">
+                    <span class="svc-num">02</span>
+                    <div class="svc-icon">⚖️</div>
+                    <h3 class="playfair">Ciudadanía Judicial</h3>
+                    <p>Reclamos vía juicio por falta de turnos o ley materna en los tribunales italianos.</p>
+                    <span class="badge-time">1.5 – 2 años</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 03 -->
+                <div class="svc-card reveal" data-delay="3">
+                    <span class="svc-num">03</span>
+                    <div class="svc-icon">📘</div>
+                    <h3 class="playfair">Pasaporte Italiano</h3>
+                    <p>Renovación o primer emisión de tu pasaporte europeo de forma ágil.</p>
+                    <span class="badge-time">35 días</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 04 -->
+                <div class="svc-card reveal" data-delay="4">
+                    <span class="svc-num">04</span>
+                    <div class="svc-icon">🪪</div>
+                    <h3 class="playfair">DNI Italiano</h3>
+                    <p>Tramitación de la Carta d'Identità Electrónica (CIE).</p>
+                    <span class="badge-time">45 días</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 05 -->
+                <div class="svc-card reveal" data-delay="5">
+                    <span class="svc-num">05</span>
+                    <div class="svc-icon">🎓</div>
+                    <h3 class="playfair">Homologación de Títulos</h3>
+                    <p>Validación de estudios secundarios, universitarios y de especialidad.</p>
+                    <span class="badge-time">180 días – 3 años</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 06 -->
+                <div class="svc-card reveal" data-delay="6">
+                    <span class="svc-num">06</span>
+                    <div class="svc-icon">🏠</div>
+                    <h3 class="playfair">Residencias y Visas</h3>
+                    <p>Asesoramiento para establecer residencia legal en Italia y España.</p>
+                    <span class="badge-time">Depende del caso</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 07 -->
+                <div class="svc-card reveal" data-delay="1">
+                    <span class="svc-num">07</span>
+                    <div class="svc-icon">📋</div>
+                    <h3 class="playfair">Codice Fiscale · AIRE</h3>
+                    <p>Inscripciones y actualizaciones consulares obligatorias (Fast It).</p>
+                    <span class="badge-time">Hasta 180 días</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 08 -->
+                <div class="svc-card reveal" data-delay="2">
+                    <span class="svc-num">08</span>
+                    <div class="svc-icon">📄</div>
+                    <h3 class="playfair">Servicios Consulares</h3>
+                    <p>Traducciones, legalizaciones, apostillas y búsqueda de actas.</p>
+                    <span class="badge-time">Depende servicio</span>
+                    <a href="https://wa.me/5492255620032" class="svc-btn">💬 Consultar &rarr;</a>
+                </div>
+                <!-- 09 -->
+                <div class="svc-card special reveal" data-delay="3">
+                    <span class="svc-num">09</span>
+                    <div class="svc-icon">✈️</div>
+                    <h3 class="playfair">Traslados y Logística</h3>
+                    <p>Atención integral para tu relocalización en Europa.</p>
+                    <span class="badge-time">Inmediato</span>
+                    <a href="https://wa.me/5492255620032" class="btn btn-green" style="margin-top:auto">Consultá sin cargo &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso -->
+    <section id="proceso" class="proceso">
+        <div class="container proceso-container">
+            <h2 class="playfair reveal">Tu ciudadanía, paso a paso</h2>
+            <div class="proceso-grid">
+                <div class="paso reveal" data-delay="1">
+                    <div class="circulo playfair">1</div>
+                    <div class="paso-texto">💬 Consulta gratuita</div>
+                </div>
+                <div class="paso reveal" data-delay="2">
+                    <div class="circulo playfair">2</div>
+                    <div class="paso-texto">🔍 Análisis genealógico</div>
+                </div>
+                <div class="paso reveal" data-delay="3">
+                    <div class="circulo playfair">3</div>
+                    <div class="paso-texto">📁 Armado de carpeta</div>
+                </div>
+                <div class="paso reveal" data-delay="4">
+                    <div class="circulo playfair">4</div>
+                    <div class="paso-texto">🏛️ Gestión consular</div>
+                </div>
+                <div class="paso reveal" data-delay="5">
+                    <div class="circulo playfair">5</div>
+                    <div class="paso-texto">🇮🇹 ¡Ciudadanía obtenida!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiempos -->
+    <section id="tiempos" class="tiempos">
+        <div class="container">
+            <h2 class="sec-title playfair reveal">Tiempos estimados</h2>
+            <p class="sec-desc reveal">Conocé los plazos promedio de resolución de cada trámite.</p>
+            <div class="tiempos-grid">
+                <div class="tiempo-card reveal" data-delay="1">
+                    <div class="t-icon">🇮🇹</div>
+                    <div class="t-info">
+                        <h4>Ciudadanía Administrativa</h4>
+                        <div class="duration">90d - 1.5 años</div>
+                        <div class="nota">Según municipio o consulado</div>
+                    </div>
+                    <div class="tiempo-barra"></div>
+                </div>
+                <div class="tiempo-card reveal" data-delay="2">
+                    <div class="t-icon">⚖️</div>
+                    <div class="t-info">
+                        <h4>Ciudadanía Judicial</h4>
+                        <div class="duration">1.5 - 2 años</div>
+                        <div class="nota">Tiempos tribunales romanos</div>
+                    </div>
+                    <div class="tiempo-barra"></div>
+                </div>
+                <div class="tiempo-card reveal" data-delay="3">
+                    <div class="t-icon">📘</div>
+                    <div class="t-info">
+                        <h4>Pasaporte Italiano</h4>
+                        <div class="duration">35 días</div>
+                        <div class="nota">Desde la presentación</div>
+                    </div>
+                    <div class="tiempo-barra"></div>
+                </div>
+                <div class="tiempo-card reveal" data-delay="4">
+                    <div class="t-icon">🪪</div>
+                    <div class="t-info">
+                        <h4>DNI Italiano (CIE)</h4>
+                        <div class="duration">45 días</div>
+                        <div class="nota">Emisión electrónica</div>
+                    </div>
+                    <div class="tiempo-barra"></div>
+                </div>
+                <div class="tiempo-card reveal" data-delay="5">
+                    <div class="t-icon">🎓</div>
+                    <div class="t-info">
+                        <h4>Homologación Títulos</h4>
+                        <div class="duration">180d - 3 años</div>
+                        <div class="nota">Depende del ministerio</div>
+                    </div>
+                    <div class="tiempo-barra"></div>
+                </div>
+                <div class="tiempo-card reveal" data-delay="6">
+                    <div class="t-icon">📋</div>
+                    <div class="t-info">
+                        <h4>Inscripción AIRE</h4>
+                        <div class="duration">Hasta 180 días</div>
+                        <div class="nota">Obligatorio por ley</div>
+                    </div>
+                    <div class="tiempo-barra"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section id="nosotros" class="nosotros">
+        <div class="container nos-grid">
+            <div class="nos-left reveal">
+                <div class="ncard-main playfair">
+                    "No somos gestores. Somos consultores con abogados."
+                </div>
+                <div class="offices-float">
+                    <div class="office-tag">
+                        <div class="bandera-css"><div class="bg-verde"></div><div class="bg-blanco"></div><div class="bg-rojo"></div></div>
+                        Roma
+                    </div>
+                    <div class="office-tag">
+                        <div class="bandera-css"><div class="bg-rojo"></div><div style="background:#F1BF00"></div><div class="bg-rojo"></div></div>
+                        Málaga
+                    </div>
+                    <div class="office-tag">
+                        <div class="bandera-css"><div style="background:#75AADB"></div><div class="bg-blanco"></div><div style="background:#75AADB"></div></div>
+                        Buenos Aires
+                    </div>
+                </div>
+            </div>
+            <div class="nos-right reveal" data-delay="2">
+                <span class="tag">¿Por qué Amattea?</span>
+                <h2 class="playfair">30 años acompañando a las personas más allá de los trámites</h2>
+                <div class="check-list">
+                    <div class="check-item"><div class="check-icon">✓</div> Equipo de abogados matriculados en Italia.</div>
+                    <div class="check-item"><div class="check-icon">✓</div> Evaluación gratuita y honesta de viabilidad.</div>
+                    <div class="check-item"><div class="check-icon">✓</div> Acompañamiento integral, sin intermediarios.</div>
+                    <div class="check-item"><div class="check-icon">✓</div> Presencia física en Argentina, Italia y España.</div>
+                    <div class="check-item"><div class="check-icon">✓</div> Más de 15.000 familias con ciudadanía obtenida.</div>
+                </div>
+                <a href="https://wa.me/5492255620032" class="btn btn-green">Analizá mi caso gratis &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acompañamiento en Italia -->
+    <section class="acompa">
+        <div class="container acompa-grid">
+            <div class="acompa-left reveal">
+                <div class="chip chip-dark">⭐ Servicio Premium</div>
+                <h2 class="playfair">Acompañamiento<br>completo en Italia</h2>
+                <p>Nuestros asesores locales en Roma te asisten presencialmente desde tu llegada hasta la finalización de tu trámite consular.</p>
+                <a href="https://wa.me/5492255620032" class="btn btn-white">💬 Consultar ahora</a>
+            </div>
+            <div class="glass-grid reveal" data-delay="2">
+                <div class="glass-card">
+                    <div class="glass-icon">✈️</div>
+                    <h4>Coordinación de viaje</h4>
+                </div>
+                <div class="glass-card">
+                    <div class="glass-icon">🏛️</div>
+                    <h4>Gestión consular en persona</h4>
+                </div>
+                <div class="glass-card">
+                    <div class="glass-icon">🪪</div>
+                    <h4>Carta d'Identità en mano</h4>
+                </div>
+                <div class="glass-card">
+                    <div class="glass-icon">🗣️</div>
+                    <h4>Equipo bilingüe local</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonios">
+        <div class="container test-container">
+            <h2 class="playfair reveal">15.000 historias con final feliz</h2>
+            <div class="carousel-wrapper reveal" data-delay="2">
+                <div class="carousel-track">
+                    <!-- Testimonios -->
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"Pude sacar mi ciudadanía en Roma. Me buscaron, me acompañaron y en un mes ya era italiano."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Marcelo R.</span>
+                            <span>Ciudadanía Administrativa — 🇦🇷 Buenos Aires</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"La vía judicial era mi única opción. Fueron transparentes con los tiempos y ganamos el caso."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Laura C.</span>
+                            <span>Ciudadanía Judicial — 🇺🇾 Montevideo</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"El pasaporte me lo dieron en 35 días exactos, tal cual prometieron. Un servicio invaluable."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Gonzalo F.</span>
+                            <span>Pasaporte Italiano — 🇦🇷 Córdoba</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"Asesoramiento integral, resolvieron mi ciudadanía y me ayudaron con mi residencia en Europa."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Sofía B.</span>
+                            <span>Ciudadanía + Residencia — 🇦🇷 Rosario</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"Homologué mi título universitario rápido. Es la clave para ejercer aquí en Madrid."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Valentina P.</span>
+                            <span>Homologación Título — 🇦🇷 → 🇪🇸 Madrid</span>
+                        </div>
+                    </div>
+                    <!-- Duplicados -->
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"Pude sacar mi ciudadanía en Roma. Me buscaron, me acompañaron y en un mes ya era italiano."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Marcelo R.</span>
+                            <span>Ciudadanía Administrativa — 🇦🇷 Buenos Aires</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"La vía judicial era mi única opción. Fueron transparentes con los tiempos y ganamos el caso."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Laura C.</span>
+                            <span>Ciudadanía Judicial — 🇺🇾 Montevideo</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"El pasaporte me lo dieron en 35 días exactos, tal cual prometieron. Un servicio invaluable."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Gonzalo F.</span>
+                            <span>Pasaporte Italiano — 🇦🇷 Córdoba</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"Asesoramiento integral, resolvieron mi ciudadanía y me ayudaron con mi residencia en Europa."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Sofía B.</span>
+                            <span>Ciudadanía + Residencia — 🇦🇷 Rosario</span>
+                        </div>
+                    </div>
+                    <div class="test-card">
+                        <div class="test-stars">★★★★★</div>
+                        <p class="test-text">"Homologué mi título universitario rápido. Es la clave para ejercer aquí en Madrid."</p>
+                        <div class="test-meta">
+                            <span class="test-author">Valentina P.</span>
+                            <span>Homologación Título — 🇦🇷 → 🇪🇸 Madrid</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos de Exito -->
+    <section class="testimonios-reales">
+        <div class="container">
+            <h2 class="sec-title playfair reveal">Casos de Éxito</h2>
+            <p class="sec-desc reveal" data-delay="1">Conocé a quienes ya lograron su objetivo con nosotros.</p>
+            <div class="casos-grid">
+                <div class="caso-card reveal" data-delay="1">
+                    <img src="testimonio-daniela.jpg" alt="Testimonio Daniela" class="caso-img">
+                    <div class="caso-info">
+                        <h4 class="playfair">Daniela</h4>
+                        <p>"Una experiencia excelente. Me acompañaron en cada etapa y lograron darme la tranquilidad que necesitaba en todo el proceso. ¡Por fin tengo mi ciudadanía!"</p>
+                    </div>
+                </div>
+                <div class="caso-card reveal" data-delay="2">
+                    <img src="testimonio-juliano.jpg" alt="Testimonio Julián" class="caso-img">
+                    <div class="caso-info">
+                        <h4 class="playfair">Julián</h4>
+                        <p>"El equipo fue sumamente profesional. Mi caso iba por vía judicial y era bastante complejo, pero me asesoraron muy bien y lograron ganarlo con éxito."</p>
+                    </div>
+                </div>
+                <div class="caso-card reveal" data-delay="3">
+                    <img src="testimonio-maria-paz.jpg" alt="Testimonio María Paz" class="caso-img">
+                    <div class="caso-info">
+                        <h4 class="playfair">María Paz</h4>
+                        <p>"Rápido, claro y efectivo. Me entregaron el pasaporte tal como lo habían prometido en los tiempos estipulados. Absolutamente recomendables."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container reveal">
+            <h2 class="playfair">¿Tenés ascendencia italiana?<br>Tu ciudadanía te espera.</h2>
+            <div class="cta-btns">
+                <a href="https://wa.me/5492255620032" class="btn btn-wa">💬 Consulta gratuita por WhatsApp</a>
+                <a href="mailto:amatteagestion@gmail.com" class="btn btn-outline-white">Escribinos por email &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="contacto">
+        <div class="container contact-grid">
+            <div class="c-info reveal">
+                <span class="tag">Contacto</span>
+                <h2 class="playfair">Hablemos de tu caso</h2>
+                <p>Nuestros abogados están listos para analizar tus documentos sin compromiso y trazar el mejor camino.</p>
+                <div class="c-btns">
+                    <a href="https://wa.me/5492255620032" class="btn btn-wa">WhatsApp</a>
+                    <a href="mailto:amatteagestion@gmail.com" class="btn btn-white">Email</a>
+                </div>
+                <div class="c-sedes">
+                    <div class="c-sede-item"><div class="bandera-css"><div class="bg-verde"></div><div class="bg-blanco"></div><div class="bg-rojo"></div></div> Roma</div>
+                    <div class="c-sede-item"><div class="bandera-css"><div class="bg-rojo"></div><div style="background:#F1BF00"></div><div class="bg-rojo"></div></div> Málaga</div>
+                    <div class="c-sede-item"><div class="bandera-css"><div style="background:#75AADB"></div><div class="bg-blanco"></div><div style="background:#75AADB"></div></div> Buenos Aires</div>
+                </div>
+            </div>
+            <div class="c-form reveal" data-delay="2">
+                <form class="contact-form" id="wa-form">
+                    <div class="form-group">
+                        <label>Nombre y Apellido</label>
+                        <input type="text" id="wa-name" class="form-control" required placeholder="Ej: Juan Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Tu WhatsApp</label>
+                        <input type="tel" id="wa-phone" class="form-control" required placeholder="+54 9...">
+                    </div>
+                    <div class="form-group">
+                        <label>¿Qué servicio te interesa?</label>
+                        <select id="wa-service" class="form-control">
+                            <option>Ciudadanía Administrativa</option>
+                            <option>Ciudadanía Judicial</option>
+                            <option>Pasaporte Italiano</option>
+                            <option>Homologación de Títulos</option>
+                            <option>Otro servicio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje breve</label>
+                        <textarea id="wa-msg" class="form-control" placeholder="Contanos tu situación actual..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-green btn-submit">Enviar consulta por WhatsApp &rarr;</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sedes -->
+    <section class="sedes">
+        <div class="container sedes-grid">
+            <div class="sede-card reveal" data-delay="1">
+                <h4><div class="bandera-css"><div class="bg-verde"></div><div class="bg-blanco"></div><div class="bg-rojo"></div></div> Roma</h4>
+                <p>Via Asinari di S. Marzano 52/54<br>Roma, Italia</p>
+            </div>
+            <div class="sede-card reveal" data-delay="2">
+                <h4><div class="bandera-css"><div class="bg-rojo"></div><div style="background:#F1BF00"></div><div class="bg-rojo"></div></div> Málaga</h4>
+                <p>Av. de La Roca 2<br>Málaga, España</p>
+            </div>
+            <div class="sede-card reveal" data-delay="3">
+                <h4><div class="bandera-css"><div style="background:#75AADB"></div><div class="bg-blanco"></div><div style="background:#75AADB"></div></div> Buenos Aires</h4>
+                <p>Piedrabuena 5015, Villa Lugano<br>Lun-Vie 10-18hs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="f-logo">
+                <div class="bandera-css"><div class="bg-verde"></div><div class="bg-blanco"></div><div class="bg-rojo"></div></div>
+                <span>Amattea Ciudadanía</span>
+            </div>
+            <div class="f-links">
+                <a href="#servicios">Servicios</a>
+                <a href="#proceso">Proceso</a>
+                <a href="#tiempos">Tiempos</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+                <a href="https://instagram.com/ciudadaniaeuropea" target="_blank">Instagram</a>
+            </div>
+            <div class="f-copy">
+                © 2025 Amattea Consultora · Buenos Aires · Roma · Málaga · amatteagestion@gmail.com
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.12, rootMargin: "0px 0px -50px 0px" };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Handle transition delay
+                    const delay = entry.target.getAttribute('data-delay');
+                    if (delay && window.innerWidth > 860) {
+                        entry.target.style.transitionDelay = `0.${delay}s`;
+                    }
+                    observer.unobserve(entry.target);
+                    
+                    // Trigger progress bars
+                    if (entry.target.classList.contains('tiempo-card')) {
+                        setTimeout(() => entry.target.classList.add('visible'), 300);
+                    }
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // WhatsApp Form Handler
+        document.getElementById('wa-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('wa-name').value;
+            const phone = document.getElementById('wa-phone').value;
+            const service = document.getElementById('wa-service').value;
+            const msg = document.getElementById('wa-msg').value;
+            
+            const text = `Hola Amattea! Soy ${name}.\n\nMe interesa el servicio: *${service}*.\n\nMensaje: ${msg}\n\nMi cel: ${phone}`;
+            const encodedText = encodeURIComponent(text);
+            const waUrl = `https://wa.me/5492255620032?text=${encodedText}`;
+            window.open(waUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
